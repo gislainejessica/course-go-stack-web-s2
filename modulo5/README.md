@@ -78,3 +78,9 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
         );
       }
     ```
+## Construindo nossa primeira página
+- Dependências
+  `yarn add react-icons`
+- Criar compontes na pagina Main
+- Estilizar nos estilos dessa página
+
