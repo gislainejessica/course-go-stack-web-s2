@@ -64,4 +64,17 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
    (Codigo javascript dentro da string css, para captar as propriedades que podem ser passam pelos componentes estilizados, a partir daí mostrar uma ou outra estilização dependendo da valor da propriedade). Ex: `color: ${props => (props.error ? 'red' : '#7159c1')};`
 
 - Propriedade y (Estilos globais)
-
+  - Criar uma pasta com os estilos globais __styles/global.js__
+  - Definir dentro desse arquivo quais estilizações vai querer aplicar para todas as páginas
+  - No arquivo App.js (*O pai de todos*) importar esse estilo global que foi definido e colocar no return para que todas as rotas tenha acesso.
+    - Code:
+    ```js
+      function App() {
+        return (
+          <>
+            <GlobalStyles />
+            <Routes />;
+          </>
+        );
+      }
+    ```
