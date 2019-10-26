@@ -28,5 +28,19 @@ No arquivo `.eslintrc.js` fazer as seguintes modificações:
       'import/prefer-default-export': 'off'
     ```
 Criar um arquivo `.prettierrc`:
-  -
+  ```js
+    {
+    "singleQuote": true,
+    "trailingComma": "es5"
+    }
+  ```
 
+---
+
+Já tá bom de configuração bora pro projeto
+__Navegação em React__:
+- Dependências:
+  `yarn add react-router-dom`
+
+- Criar um arquivo na raiz para referenciar as rotas `routes.js`
+- Criar as páginas que estarão disponíveis para serem acessadas _pages_/Main e _pages_/Repository
