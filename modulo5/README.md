@@ -37,10 +37,31 @@ Criar um arquivo `.prettierrc`:
 
 ---
 
+## Navegação
+
 Já tá bom de configuração bora pro projeto
 __Navegação em React__:
 - Dependências:
+
   `yarn add react-router-dom`
 
 - Criar um arquivo na raiz para referenciar as rotas `routes.js`
-- Criar as páginas que estarão disponíveis para serem acessadas _pages_/Main e _pages_/Repository
+- Criar as páginas que estarão disponíveis para serem acessadas **_pages_/Main e _pages_/Repository**
+
+
+## Componentes estilizados
+
+__Styled Components__
+- Dependências:
+
+  `yarn add styled-components`
+
+Biblioteca para fazer a estilização dos componentes, usando a sintaxe de _css_, mas num arquivo `.js`.
+Importante ter a extensão do styled-components instalada no _vscode_ para ele entender a sintaxe de _css_ escrita dentro do arquivo `.js`
+
+- Propriedade x:
+
+   (Codigo javascript dentro da string css, para captar as propriedades que podem ser passam pelos componentes estilizados, a partir daí mostrar uma ou outra estilização dependendo da valor da propriedade). Ex: `color: ${props => (props.error ? 'red' : '#7159c1')};`
+
+- Propriedade y (Estilos globais)
+
