@@ -1,3 +1,28 @@
+- [x] Criando o projeto React
+- [X] ESLint, Prettier & EditorConfig
+- [x] Roteamento no React
+- [x] Styled Components
+- [x] Estilos Globais
+- [x] Estilizando Main
+- [x] Adicionando repositórios
+- [x] Listando repositórios
+- [x] Utilizando LocalStorage
+- [x] Navegação de rotas
+- [ ] Carregando dados da API
+- [ ] Definindo PropTypes
+- [ ] Exibindo repositõrios
+- [ ] Exibindo issues
+
+---
+
+:white_check_mark: check-list
+
+Ver videos | Codar | Documentar| Revisar
+-----------|-------|-----------|---------
+:heavy_check_mark:|:clock10:|:clock10:|:clock10:
+
+---
+
 ## __Eslint, Prettier e EditorConfig__
 
 ---
