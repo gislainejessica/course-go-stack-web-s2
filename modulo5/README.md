@@ -110,6 +110,38 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
         }
       }
     ```
+### Linkagem de paginas (Naveação por rotas)
+
+Essa navegação poderia ser feita atravez de links do próprio HTML, porém dessa forma teriamos o recarregamento das paginas, o que não queremos que aconteça, então vamos fazer para essa caso usando o _Link_ da bilioteca para navegação entre rotas que já está instalada `react-router-dom`.
+
+- ```js
+    <Link to={`/repository/${repositorie.name}`}> Detalhes </Link>
+  ```
+  - Exemplo de rota para qual o link acima pode se direcionado:
+  *`http://localhost:3000/repository/`_facebook/react_*
+
+O código acima tem só um probleminha, pois como estamos passando o nome do repositório como um parâmetro de rotas, quando isso for pra a url vamos ver o nome do repositório separado por `/`, oque não é ideail, pois as barras representam um pasta ou endereço diferente e nesse caso a `/` é apenas um caracter especial dentro do nome do repsositório, então para isso precisamos fazer um __encoding__.
+
+- Para que essa barra `/` seja contado apenas como um caracter especial fazemos o seguinte:
+  - Usar uma função intrinsica do javacript para fazer esse enconde
+  ```js
+    <Link to={`/repository/${encodeURIComponent(repositorie.name)}`}> Detalhes </Link>
+  ```
+  - Agora, nesse caso, teremos a seguinte url de resposta:
+  *`http://localhost:3000/repository/`facebook%2Freact*
+
+- Agora, só pra finalizar, temos que falar para a rota lá onde a rota é criada, que essa rota recebe um parametro.
+  ```js
+    <Route path="/repository/:repository" component={Repository} />
+  ```
+
+- Obs: se que quiser usar as informações desse conteúdo do parâmetro que foi realizado o encode é preciso fazer um decode e isso é super simples, o javascript tambem tem uma função para fazer esse __decoding__.
+
+```js
+  decodeURIComponent( match.params.repository)
+```
+
+---
 
 - Issues:
   - Quando coloco repositorio errado botão fica cinza pra sempre
