@@ -87,5 +87,29 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
 - Configurando uma api para acessar os serviços de api externas
   - `yarn add axios`
 
+- Salvar os dados localmente usando __LocalStorage__.
+
+  - Para que os dados não se percam toda vez que a pagina for atualizada, vamos fazer um cache para guardar as informações localmente no navegador.
+
+
+    ```js
+      // Carregar dados (Tem coisas no localStorge? então carrega aí)
+      componentDidMount(){
+        const repositories = localStorage.getItem('repositories')
+
+        if (repositories){
+          this.state({repositories: JSON.parse(repositories)})
+        }
+      }
+      // Salvar dados localStorage (Tem dados novos? salva aí.)
+      componentDidUpdate(_, prevState){
+        const {repositories} = this.state;
+
+        if (prevState.repositories !== repositories) {
+          localStorage.setItem('repositories', JSON.stringify(repositories))
+        }
+      }
+    ```
+
 - Issues:
   - Quando coloco repositorio errado botão fica cinza pra sempre

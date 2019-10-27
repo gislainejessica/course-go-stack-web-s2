@@ -12,6 +12,22 @@ class Main extends Component {
     repositories: [],
     loading: false,
   };
+  // Carregar dados (Tem coisas no localStorge? então carrega aí)
+  componentDidMount(){
+    const repositories = localStorage.getItem('repositories')
+
+    if (repositories){
+      this.setState({repositories: JSON.parse(repositories)})
+    }
+  }
+  // Salvar dados localStorage  (Tem dados novos? salva aí.)
+  componentDidUpdate(_, prevState){
+    const {repositories} = this.state;
+
+    if (prevState.repositories !== repositories) {
+      localStorage.setItem('repositories', JSON.stringify(repositories))
+    }
+  }
 
   handlerInput = e => {
     this.setState({ newRepo: e.target.value });
