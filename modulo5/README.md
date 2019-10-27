@@ -84,3 +84,5 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
 - Criar compontes na pagina Main
 - Estilizar nos estilos dessa página
 
+- Configurando uma api para acessar os serviços de api externas
+  - `yarn add axios`
