@@ -86,3 +86,6 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
 
 - Configurando uma api para acessar os serviços de api externas
   - `yarn add axios`
+
+- Issues:
+  - Quando coloco repositorio errado botão fica cinza pra sempre
