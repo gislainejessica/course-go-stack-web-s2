@@ -163,10 +163,26 @@ O código acima tem só um probleminha, pois como estamos passando o nome do rep
 - Obs: se que quiser usar as informações desse conteúdo do parâmetro que foi realizado o encode é preciso fazer um decode e isso é super simples, o javascript tambem tem uma função para fazer esse __decoding__.
 
 ```js
-  decodeURIComponent( match.params.repository)
+  decodeURIComponent(match.params.repository)
 ```
 
 ---
+Carregando dados da API
+- Primeiramente, nos casos onde temos que fazer requisições a mais de uma rota seguidas, pensamos. Okay, eu faço esse chamada a API, pego o que preciso, faço outra chamada, pego o restante do que preciso e agora eu posso fazer tudo que eu quero com esses dados:
+```js
+    const response = await api.get(`/repos/${repoName}`)
+    const issues = await api.get(`/repos/${repoName}/issues`)
+```
+Porém nessa abordagem há um pequeno probleminha, que é uma requisição ter que esperar a anterior terminar para ela começar, mas elas não são dependentes uma da outra, elas poderia facilmente serem iniciadas mesmo que a resposta de uma ainda não tennha sido retornada. O importante é que eu tenha os dados de ambas para a proxima etapa, independente de quem foi mais rapida pra responder ou qualquer outra coisa.
 
+Para resolver isso, vamos fazer as duas requisições serem chamadas ao mesmo tempo, da seguinte forma:
+- ```js
+
+
+  ```
+
+
+
+---
 - Issues:
   - Quando coloco repositorio errado botão fica cinza pra sempre
