@@ -8,7 +8,7 @@
 - [x] Listando repositórios
 - [x] Utilizando LocalStorage
 - [x] Navegação de rotas
-- [ ] Carregando dados da API
+- [x] Carregando dados da API
 - [ ] Definindo PropTypes
 - [ ] Exibindo repositõrios
 - [ ] Exibindo issues
@@ -189,7 +189,9 @@ Para resolver isso, vamos fazer as duas requisições serem chamadas ao mesmo te
     ]);
 
   ```
-
+### Prop-Types
+Validação de propriedades
+`yarn add prop-types`
 
 
 ---
