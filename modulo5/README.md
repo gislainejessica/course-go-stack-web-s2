@@ -1,3 +1,5 @@
+> “Para quem fica melhor a cada dia, ficar pronto é utopia”!
+
 - [x] Criando o projeto React
 - [X] ESLint, Prettier & EditorConfig
 - [x] Roteamento no React
