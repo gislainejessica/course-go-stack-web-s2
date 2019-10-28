@@ -176,8 +176,17 @@ Carregando dados da API
 Porém nessa abordagem há um pequeno probleminha, que é uma requisição ter que esperar a anterior terminar para ela começar, mas elas não são dependentes uma da outra, elas poderia facilmente serem iniciadas mesmo que a resposta de uma ainda não tennha sido retornada. O importante é que eu tenha os dados de ambas para a proxima etapa, independente de quem foi mais rapida pra responder ou qualquer outra coisa.
 
 Para resolver isso, vamos fazer as duas requisições serem chamadas ao mesmo tempo, da seguinte forma:
-- ```js
 
+  ```js
+  const [repository, issues] = await Promise.all([
+      api.get(`/repos/${repoName}`),
+      api.get(`/repos/${repoName}/issues`, {
+        params: {
+          state: 'open',
+          per_page: 5,
+        },
+      }),
+    ]);
 
   ```
 
