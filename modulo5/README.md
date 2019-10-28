@@ -193,6 +193,10 @@ Para resolver isso, vamos fazer as duas requisições serem chamadas ao mesmo te
 Validação de propriedades
 `yarn add prop-types`
 
+-- Separar componetens que serão utilizados em mais de uma pagina
+- Criar no src uma pasta _components_ e colocar dentro todos os componentes que serão reutilizados, sendo um componente estilizado ou não
+- Importar esses componentes sempre que precisarem ser utlizados, como já estava sendo feito na importação dos estilos, mas agora vamos importar das pastas componentes, pois assim não precisamos ficar repetindo codigo nos componentes estilizados de cada página
+
 
 ---
 - Issues:
