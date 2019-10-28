@@ -11,17 +11,29 @@
 - [x] Carregando dados da API
 - [x] Definindo PropTypes
 - [x] Exibindo repositõrios
-- [ ] Exibindo issues
+- [x] Exibindo issues
 
----
+------
 
 :white_check_mark: check-list
 
 Ver videos | Codar | Documentar| Revisar
 -----------|-------|-----------|---------
-:heavy_check_mark:|:clock10:|:clock10:|:clock10:
+:heavy_check_mark:|:heavy_check_mark:|:clock10:|:clock10:
 
----
+------
+# Conteudo presente nessa aplicação (Table of Contents)
+
+Background
+Install
+Usage
+Generator
+Badge
+Example Readmes
+Related Efforts
+Maintainers
+Contributing
+License
 
 ## __Eslint, Prettier e EditorConfig__
 
@@ -59,8 +71,6 @@ Criar um arquivo `.prettierrc`:
     "trailingComma": "es5"
     }
   ```
-
----
 
 ## Navegação
 
@@ -103,6 +113,7 @@ Importante ter a extensão do styled-components instalada no _vscode_ para ele e
         );
       }
     ```
+
 ## Construindo nossa primeira página
 - Dependências
   `yarn add react-icons`
@@ -190,14 +201,16 @@ Para resolver isso, vamos fazer as duas requisições serem chamadas ao mesmo te
 
   ```
 ### Prop-Types
-Validação de propriedades
-`yarn add prop-types`
+Validação de propriedades (props)
+  - `yarn add prop-types`
 
--- Separar componetens que serão utilizados em mais de uma pagina
+__Separar componentes que serão utilizados em mais de uma pagina__
+
 - Criar no src uma pasta _components_ e colocar dentro todos os componentes que serão reutilizados, sendo um componente estilizado ou não
 - Importar esses componentes sempre que precisarem ser utlizados, como já estava sendo feito na importação dos estilos, mas agora vamos importar das pastas componentes, pois assim não precisamos ficar repetindo codigo nos componentes estilizados de cada página
 
+### Listagem de Issues
 
----
+------
 - Issues:
   - Quando coloco repositorio errado botão fica cinza pra sempre
