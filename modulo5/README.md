@@ -9,8 +9,8 @@
 - [x] Utilizando LocalStorage
 - [x] Navegação de rotas
 - [x] Carregando dados da API
-- [ ] Definindo PropTypes
-- [ ] Exibindo repositõrios
+- [x] Definindo PropTypes
+- [x] Exibindo repositõrios
 - [ ] Exibindo issues
 
 ---
