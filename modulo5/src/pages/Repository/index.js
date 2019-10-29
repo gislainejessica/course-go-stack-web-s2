@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 import Container from '../../components/Container';
 
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, Footer, Button } from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -22,15 +22,37 @@ export default class Repository extends Component {
     repository: {},
     issues: [],
     loading: true,
+    page: 1
   };
 
   async componentDidMount() {
     const { match } = this.props;
+    const { page } = this.state
     const repoName = decodeURIComponent(match.params.repository);
 
     const [repository, issues] = await Promise.all([
       api.get(`/repos/${repoName}`),
-      api.get(`/repos/${repoName}/issues`, {
+      api.get(`/repos/${repoName}/issues?page=${page}`, {
+        params: {
+          state: 'open',
+          per_page: 5,
+        },
+      }),
+    ]);
+    this.setState({
+      repository: repository.data,
+      loading: false,
+      issues: issues.data,
+    });
+  }
+  async componentDidUpdate(){
+    const { match } = this.props;
+    const { page } = this.state
+    const repoName = decodeURIComponent(match.params.repository);
+
+    const [repository, issues] = await Promise.all([
+      api.get(`/repos/${repoName}`),
+      api.get(`/repos/${repoName}/issues?page=${page}`, {
         params: {
           state: 'open',
           per_page: 5,
@@ -44,8 +66,18 @@ export default class Repository extends Component {
     });
   }
 
+  handleNextIssues = () => {
+    const { page } = this.state
+    {/** Botão apaga */}
+    this.setState({page: page + 1})
+  }
+  handlePreviusIssues = () => {
+    const { page } = this.state
+    this.setState({page: page - 1})
+  }
+
   render() {
-    const { repository, loading, issues } = this.state;
+    const { repository, loading, issues, page } = this.state;
 
     if (loading) {
       return <Loading> Carregando ... </Loading>;
@@ -76,6 +108,10 @@ export default class Repository extends Component {
             </li>
           ))}
         </IssueList>
+        <Footer>
+          <Button onClick={this.handlePreviusIssues} disabled={page}> Previus </Button>
+          <Button onClick={this.handleNextIssues}> Next </Button>
+        </Footer>
       </Container>
     );
   }

@@ -11,6 +11,7 @@ class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    error: null,
   };
 
   // Carregar dados (Tem coisas no localStorge? então carrega aí)
@@ -37,27 +38,40 @@ class Main extends Component {
 
   handlerSubmit = async e => {
     e.preventDefault();
-    this.setState({ loading: true });
-    const { newRepo, repositories } = this.state;
-    const response = await api.get(`/repos/${newRepo}`);
-    const data = {
-      name: response.data.full_name,
-    };
-    this.setState({
-      newRepo: '',
-      repositories: [...repositories, data],
-      loading: false,
-    });
+    this.setState({ loading: true, error: false });
+
+    try {
+      const { newRepo, repositories } = this.state;
+      if (newRepo === '') throw new Error("Digite um repositório");
+
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      const findRepo = repositories.find(repo => repo.name === data.name)
+      if (findRepo) throw new Error("Repositório já existe")
+
+      this.setState({
+        newRepo: '',
+        repositories: [...repositories, data],
+      });
+    } catch (error) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, error } = this.state;
     return (
       <Container>
         <h1>
           <FaGithubAlt /> Repositórios{' '}
         </h1>
-        <Form onSubmit={this.handlerSubmit}>
+        <Form onSubmit={this.handlerSubmit} error={error}>
           <input
             type="text"
             placeholder="Adicionar Repositórios"

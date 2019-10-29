@@ -90,3 +90,34 @@ export const IssueList = styled.ul`
     }
   }
 `;
+
+export const Button = styled.button.attrs(props => ({
+  disabled: props.disabled === 1,
+}))`
+  background: #ad4452;
+  color: #eee;
+  border: 1px solid #eee;
+  padding: 0 15px;
+  margin-top: 15px;
+  border-radius: 4px;
+  height: 40px;
+  width: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &[disabled] {
+    opacity: 0.6;
+  }
+`;
+
+export const Footer = styled.div`
+  border: 0;
+  padding: 0 15px;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
