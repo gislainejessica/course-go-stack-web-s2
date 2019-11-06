@@ -7,7 +7,14 @@ import api from '../../services/api';
 
 import Container from '../../components/Container';
 
-import { Loading, Owner, IssueList, Footer, Button } from './styles';
+import {
+  Loading,
+  Owner,
+  IssueList,
+  Footer,
+  Button,
+  IssueFilter,
+} from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -28,17 +35,17 @@ export default class Repository extends Component {
       { state: 'closed', label: 'Fechadas', active: false },
     ],
     filterIndex: 0,
-    page: 1
+    page: 1,
   };
 
   async componentDidMount() {
     const { match } = this.props;
-    const { filters } = this.state
+    const { filters } = this.state;
     const repoName = decodeURIComponent(match.params.repository);
 
     const [repository, issues] = await Promise.all([
       api.get(`/repos/${repoName}`),
-      api.get(`/repos/${repoName}/issues?page=${page}`, {
+      api.get(`/repos/${repoName}/issues`, {
         params: {
           state: filters.find(f => f.active).state,
           per_page: 5,
@@ -51,39 +58,47 @@ export default class Repository extends Component {
       issues: issues.data,
     });
   }
-  async componentDidUpdate(){
+
+  // Funciona como se fosse o update que tava usando antes
+  loadIssues = async () => {
     const { match } = this.props;
-    const { page } = this.state
+    const { filters, filterIndex, page } = this.state;
+
     const repoName = decodeURIComponent(match.params.repository);
 
-    const [repository, issues] = await Promise.all([
-      api.get(`/repos/${repoName}`),
-      api.get(`/repos/${repoName}/issues?page=${page}`, {
-        params: {
-          state: 'open',
-          per_page: 5,
-        },
-      }),
-    ]);
-    this.setState({
-      repository: repository.data,
-      loading: false,
-      issues: issues.data,
+    const response = await api.get(`/repos/${repoName}/issues`, {
+      params: {
+        state: filters[filterIndex].state,
+        per_page: 5,
+        page,
+      },
     });
-  }
 
-  handleNextIssues = () => {
-    const { page } = this.state
-    {/** Botão apaga */}
-    this.setState({page: page + 1})
-  }
-  handlePreviusIssues = () => {
-    const { page } = this.state
-    this.setState({page: page - 1})
-  }
+    this.setState({ issues: response.data });
+  };
+
+  handleFilterClick = async filterIndex => {
+    await this.setState({ filterIndex });
+    this.loadIssues();
+  };
+
+  handlePage = async action => {
+    const { page } = this.state;
+    await this.setState({
+      page: action === 'back' ? page - 1 : page + 1,
+    });
+    this.loadIssues();
+  };
 
   render() {
-    const { repository, loading, issues, page } = this.state;
+    const {
+      repository,
+      loading,
+      issues,
+      page,
+      filterIndex,
+      filters,
+    } = this.state;
 
     if (loading) {
       return <Loading> Carregando ... </Loading>;
@@ -99,6 +114,18 @@ export default class Repository extends Component {
         </Owner>
 
         <IssueList>
+          <IssueFilter active={filterIndex}>
+            {filters.map((filter, index) => (
+              <button
+                type="button"
+                key={filter.label}
+                onClick={() => this.handleFilterClick(index)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </IssueFilter>
+
           {issues.map(issue => (
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
@@ -116,8 +143,11 @@ export default class Repository extends Component {
           ))}
         </IssueList>
         <Footer>
-          <Button onClick={this.handlePreviusIssues} disabled={page}> Previus </Button>
-          <Button onClick={this.handleNextIssues}> Next </Button>
+          <Button onClick={() => this.handlePage('back')} disabled={page}>
+            {' '}
+            Previus{' '}
+          </Button>
+          <Button onClick={() => this.handlePage('next')}> Next </Button>
         </Footer>
       </Container>
     );
