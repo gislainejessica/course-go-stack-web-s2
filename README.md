@@ -17,6 +17,6 @@ Mas se quiser decolar de vez, tem que seguir a lista de tarefas:
 - [ ] :one: Modulo 4
 - [ ] :v: Tarefa modulo 4
 - [x] :two: Modulo 5
-- [ ] :ok_hand: Tarefa modulo 5 
+- [x] :ok_hand: Tarefa modulo 5 
 
 
